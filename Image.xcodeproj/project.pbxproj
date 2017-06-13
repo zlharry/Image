@@ -13,6 +13,9 @@
 		4AE9B2331EEFC462007440D7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE9B22E1EEFC462007440D7 /* AppDelegate.m */; };
 		4AE9B2341EEFC462007440D7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE9B2301EEFC462007440D7 /* main.m */; };
 		4AE9B2351EEFC462007440D7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE9B2321EEFC462007440D7 /* ViewController.m */; };
+		4AE9B2391EEFCEA0007440D7 /* YHChoicePicView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE9B2381EEFCEA0007440D7 /* YHChoicePicView.m */; };
+		4AE9B23C1EEFEA28007440D7 /* YHChoicePicViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE9B23B1EEFEA28007440D7 /* YHChoicePicViewCell.m */; };
+		4AE9B23F1EEFEDC6007440D7 /* PHAsset+YHChoicePicView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE9B23E1EEFEDC6007440D7 /* PHAsset+YHChoicePicView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,12 @@
 		4AE9B2301EEFC462007440D7 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4AE9B2311EEFC462007440D7 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		4AE9B2321EEFC462007440D7 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		4AE9B2371EEFCEA0007440D7 /* YHChoicePicView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YHChoicePicView.h; sourceTree = "<group>"; };
+		4AE9B2381EEFCEA0007440D7 /* YHChoicePicView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YHChoicePicView.m; sourceTree = "<group>"; };
+		4AE9B23A1EEFEA28007440D7 /* YHChoicePicViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YHChoicePicViewCell.h; sourceTree = "<group>"; };
+		4AE9B23B1EEFEA28007440D7 /* YHChoicePicViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YHChoicePicViewCell.m; sourceTree = "<group>"; };
+		4AE9B23D1EEFEDC6007440D7 /* PHAsset+YHChoicePicView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PHAsset+YHChoicePicView.h"; sourceTree = "<group>"; };
+		4AE9B23E1EEFEDC6007440D7 /* PHAsset+YHChoicePicView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PHAsset+YHChoicePicView.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,8 +108,22 @@
 		4AE9B22F1EEFC462007440D7 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				4AE9B2361EEFCE7C007440D7 /* YHChoicePicView */,
 			);
 			path = Lib;
+			sourceTree = "<group>";
+		};
+		4AE9B2361EEFCE7C007440D7 /* YHChoicePicView */ = {
+			isa = PBXGroup;
+			children = (
+				4AE9B2371EEFCEA0007440D7 /* YHChoicePicView.h */,
+				4AE9B2381EEFCEA0007440D7 /* YHChoicePicView.m */,
+				4AE9B23A1EEFEA28007440D7 /* YHChoicePicViewCell.h */,
+				4AE9B23B1EEFEA28007440D7 /* YHChoicePicViewCell.m */,
+				4AE9B23D1EEFEDC6007440D7 /* PHAsset+YHChoicePicView.h */,
+				4AE9B23E1EEFEDC6007440D7 /* PHAsset+YHChoicePicView.m */,
+			);
+			path = YHChoicePicView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -177,7 +200,10 @@
 			files = (
 				4AE9B2351EEFC462007440D7 /* ViewController.m in Sources */,
 				4AE9B2341EEFC462007440D7 /* main.m in Sources */,
+				4AE9B23F1EEFEDC6007440D7 /* PHAsset+YHChoicePicView.m in Sources */,
+				4AE9B23C1EEFEA28007440D7 /* YHChoicePicViewCell.m in Sources */,
 				4AE9B2331EEFC462007440D7 /* AppDelegate.m in Sources */,
+				4AE9B2391EEFCEA0007440D7 /* YHChoicePicView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
