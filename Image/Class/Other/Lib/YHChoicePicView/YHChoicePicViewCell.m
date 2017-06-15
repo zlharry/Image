@@ -42,7 +42,7 @@
         
         
         NSData *imgData = UIImageJPEGRepresentation(image, 1.0);
-        [imgData writeToFile:@"/Users/harry/Desktop/test.jpg" atomically:YES];
+//        [imgData writeToFile:@"/Users/harry/Desktop/test.jpg" atomically:YES];
     }];
     
     _model = model;

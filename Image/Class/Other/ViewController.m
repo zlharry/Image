@@ -48,7 +48,7 @@
     
     CGSize size = CGSizeMake(200, 200);
     UIImage *newImage = [image scaleOriginalToSize:size];
-    [UIImageJPEGRepresentation(newImage, 1.0) writeToFile:@"/Users/harry/Desktop/hh2.jpg" atomically:YES];
+//    [UIImageJPEGRepresentation(newImage, 1.0) writeToFile:@"/Users/harry/Desktop/hh2.jpg" atomically:YES];
     
     [newImage saveToPhotosAlbumWithBlock:^(NSError *error) {
         NSLog(@"%@", error);
