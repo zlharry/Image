@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YHChoicePicViewCellModel.h"
 
-@class PHAsset;
 
 @interface YHChoicePicViewCell : UICollectionViewCell
 
-@property (nonatomic, strong) PHAsset *asset;
+@property (nonatomic, strong) YHChoicePicViewCellModel *model;
 
 @end

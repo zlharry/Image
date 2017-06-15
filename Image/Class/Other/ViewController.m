@@ -10,7 +10,9 @@
 
 #import "YHChoicePicView.h"
 
-#import <Photos/Photos.h>
+#import "UIImage+YH.h"
+
+//#import <Photos/Photos.h>
 
 
 @interface ViewController ()
@@ -38,9 +40,22 @@
     CGFloat choiceX = 10;
     CGFloat choiceY = 80;
     CGFloat choiceW = self.view.frame.size.width - 2 * choiceX;
-    CGFloat choiceH = 600;
+    CGFloat choiceH = 500;
     self.choicePicView.frame = CGRectMake(choiceX, choiceY, choiceW, choiceH);
-
+    
+    
+    UIImage *image = [UIImage imageNamed:@"test.jpg"];
+    
+    CGSize size = CGSizeMake(200, 200);
+    UIImage *newImage = [image scaleOriginalToSize:size];
+    [UIImageJPEGRepresentation(newImage, 1.0) writeToFile:@"/Users/harry/Desktop/hh2.jpg" atomically:YES];
+    
+    [newImage saveToPhotosAlbumWithBlock:^(NSError *error) {
+        NSLog(@"%@", error);
+    }];
+//    NSLog(@"%@", newImage);
+    
+    
     
 }
 

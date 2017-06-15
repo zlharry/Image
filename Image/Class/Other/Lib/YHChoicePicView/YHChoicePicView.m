@@ -8,11 +8,13 @@
 
 #import "YHChoicePicView.h"
 
-#import <Photos/Photos.h>
-
 #import "YHChoicePicViewCell.h"
+//#import "YHChoicePicViewCellModel.m"
 
-#define CELL_ID @"YHChoicePicViewCell_id"
+#define CELL_ID @"YHChoicePicViewCell_id"   // CELL 重用ID
+//#define COLUMNS 4 // 显示的列数
+//#define COLUMN_Padding 5 // 列间距
+//#define ROW_Padding 5 // 行间距
 
 @interface YHChoicePicView () <UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -31,20 +33,7 @@
         
         self.backgroundColor = [UIColor yellowColor];
         
-        // 1.判断是否有
-        PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
-        if (status == PHAuthorizationStatusRestricted ||
-            status == PHAuthorizationStatusDenied) {
-            // 这里便是无访问权限
-            NSLog(@"没有访问权限");
-        }
-        else
-        {
-            NSLog(@"有访问权限");
-            self.pics = [self getAllAssetInPhotoAblumWithAscending:YES];
-            NSLog(@"%@", self.pics);
-            [self.collectionView reloadData];
-        }
+       
     }
     
     return self;
@@ -55,6 +44,9 @@
 {
     if (!_collectionView) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+//        CGFloat sizeW = (self.frame.size.width - (COLUMNS + 1) * COLUMN_Padding) / COLUMNS;
+//        CGFloat sizeH = sizeW;
+//        layout.itemSize = CGSizeMake(sizeW, sizeH);
         UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
         [self addSubview:collectionView];
         _collectionView = collectionView;
@@ -66,7 +58,6 @@
         
         [collectionView registerClass:[YHChoicePicViewCell class] forCellWithReuseIdentifier:CELL_ID];
         
-//        collectionView.delegate = self
     }
     
     return _collectionView;
@@ -78,6 +69,39 @@
     [super layoutSubviews];
     
     [self setupFrames];
+    
+    
+//    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+//    CGFloat sizeW = (self.frame.size.width - (COLUMNS + 1) * COLUMN_Padding) / COLUMNS;
+//    CGFloat sizeH = sizeW;
+//    layout.itemSize = CGSizeMake(sizeW, sizeH);
+////    layout.minimumLineSpacing = COLUMN_Padding;
+//    
+//    NSLog(@"%f -- %f", sizeW, self.frame.size.width);
+//    
+//    // 设置列的最小间距
+//    layout.minimumInteritemSpacing = 10;
+//    // 设置最小行间距
+//    layout.minimumLineSpacing = 15;
+//    // 设置布局的内边距
+//    layout.sectionInset = UIEdgeInsetsMake(15, 15, 15, 15);
+//    // 滚动方向
+//    
+//    [self.collectionView setCollectionViewLayout:layout animated:YES];
+    
+    // 1.判断是否有
+    PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
+    if (status == PHAuthorizationStatusRestricted ||
+        status == PHAuthorizationStatusDenied) {
+        // 这里便是无访问权限
+        NSLog(@"没有访问权限");
+    }
+    else
+    {
+        NSLog(@"有访问权限");
+        [self showAllPicsWithAscending:YES];
+    }
+    
 }
 
 - (void)setupFrames
@@ -100,14 +124,23 @@
 {
     YHChoicePicViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CELL_ID forIndexPath:indexPath];
     
+    YHChoicePicViewCellModel *model = self.pics[indexPath.item];
+    cell.model = model;
+    
     return cell;
 }
 
-#pragma mark - 获取相册内所有照片资源
-- (NSArray<PHAsset *> *)getAllAssetInPhotoAblumWithAscending:(BOOL)ascending
+#pragma mark -UICollectionViewDelegate
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    __block NSMutableArray<PHAsset *> *assets = [NSMutableArray array];
-    
+    return CGSizeMake(200, 200);
+}
+
+#pragma mark - 获取相册内所有照片资源
+/** 加载所有的手机图片资源 */
+- (void)getAllPicsWithAscending:(BOOL)ascending
+{
+    __block NSMutableArray<YHChoicePicViewCellModel *> *models = [NSMutableArray<YHChoicePicViewCellModel *> array];
     PHFetchOptions *option = [[PHFetchOptions alloc] init];
     //ascending 为YES时，按照照片的创建时间升序排列;为NO时，则降序排列
     option.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:ascending]];
@@ -115,49 +148,25 @@
     PHFetchResult *result = [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeImage options:option];
     [result enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         PHAsset *asset = (PHAsset *)obj;
-        NSLog(@"照片名%@", [asset valueForKey:@"filename"]);
-        NSLog(@"%@", [self imageWithAss:asset]);
         
         
-        [assets addObject:asset];
+        [models addObject:[YHChoicePicViewCellModel modelWithAsset:asset]];
     }];
-    
-    
-    return assets;
+    self.pics = models;
+//    PHCachingImageManager *manager = (PHCachingImageManager *)[PHCachingImageManager defaultManager];
+//    
+//    [manager startCachingImagesForAssets:self.pics
+//                              targetSize:CGSizeMake(400, 400)
+//                             contentMode:PHImageContentModeAspectFill
+//                                 options:nil];
 }
 
-- (UIImage *)imageWithAss:(PHAsset *)asset
+/** 显示所有图片资源 */
+- (void)showAllPicsWithAscending:(BOOL)ascending
 {
-    PHImageRequestOptions *option = [[PHImageRequestOptions alloc] init];
-    //仅显示缩略图，不控制质量显示
-    /**
-     PHImageRequestOptionsResizeModeNone,
-     PHImageRequestOptionsResizeModeFast, //根据传入的size，迅速加载大小相匹配(略大于或略小于)的图像
-     PHImageRequestOptionsResizeModeExact //精确的加载与传入size相匹配的图像
-     */
-    option.resizeMode = PHImageRequestOptionsResizeModeFast;
-    option.networkAccessAllowed = YES;
-    //param：targetSize 即你想要的图片尺寸，若想要原尺寸则可输入PHImageManagerMaximumSize
-    
-    CGSize size = CGSizeMake(100, 100);
-    
-    __block UIImage *img = nil;
-    NSLog(@"---:  %@", [NSThread currentThread]);
-    [[PHCachingImageManager defaultManager] requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeAspectFit options:option resultHandler:^(UIImage * _Nullable image, NSDictionary * _Nullable info) {
-        //解析出来的图片
-        img = image;
-        NSLog(@"info ---:  %@", [NSThread currentThread]);
-        
-        
-        
-    }];
-    
-    return img;
+    [self getAllPicsWithAscending:ascending];
+    [self.collectionView reloadData];
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-    PHAsset *asset = self.pics[0];
-    NSLog(@"%@", [self imageWithAss:asset]);
-}
+
 @end

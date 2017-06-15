@@ -9,7 +9,6 @@
 #import "YHChoicePicViewCell.h"
 
 #import <Photos/Photos.h>
-#import "PHAsset+YHChoicePicView.h"
 
 @interface YHChoicePicViewCell ()
 
@@ -27,9 +26,26 @@
     return self;
 }
 
-- (void)setAsset:(PHAsset *)asset
+- (void)setModel:(YHChoicePicViewCellModel *)model
 {
-    _asset = asset;
+    
+    __weak YHChoicePicViewCell *weakSelf = self;
+    CGSize size = CGSizeMake(4000, 4000);
+    
+    // 先取消原来的请求
+    [_model cancelRequeat];
+    
+    // 请求当前的
+    [model getImageWithAscending:YES size:size useingBlock:^(UIImage *image) {
+        weakSelf.imageView.image = image;
+       
+        
+        
+        NSData *imgData = UIImageJPEGRepresentation(image, 1.0);
+        [imgData writeToFile:@"/Users/harry/Desktop/test.jpg" atomically:YES];
+    }];
+    
+    _model = model;
 }
 
 - (UIImageView *)imageView
