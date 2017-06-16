@@ -54,22 +54,23 @@
     }];
     
     // 是否选中
+//    self.selectBtn.selected = model.selected;
+    
     if (model.selected)
     {
         // 选择的状态
+        self.selectBtn.backgroundColor = [UIColor greenColor];
     }
     else
     {
         // 未选择的状态
+        self.selectBtn.backgroundColor = [UIColor redColor];
     }
     
     
     // 是否显示蒙版
-    if (model.canSelect) {
-        // 可以继续选择
-    } else {
-        // 不可以继续选择了
-    }
+    self.coverView.hidden = !model.canSelect;
+    
     
     _model = model;
 }

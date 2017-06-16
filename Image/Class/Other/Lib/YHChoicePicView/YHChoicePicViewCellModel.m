@@ -24,6 +24,7 @@
 {
     YHChoicePicViewCellModel *model = [[YHChoicePicViewCellModel alloc] init];
     model.asset = asset;
+    model.canSelect = YES;
     return model;
 }
 
