@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A04A0421EF38FD8004671F5 /* YHChoicePreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A04A0411EF38FD8004671F5 /* YHChoicePreView.m */; };
 		4AC6F6471EF1778400E0538C /* UIImage+YH.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC6F6461EF1778400E0538C /* UIImage+YH.m */; };
 		4AC6F6491EF17C0700E0538C /* test.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4AC6F6481EF17C0700E0538C /* test.jpg */; };
 		4AE9B21F1EEFC42B007440D7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AE9B21D1EEFC42B007440D7 /* Main.storyboard */; };
@@ -23,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4A04A0401EF38FD8004671F5 /* YHChoicePreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YHChoicePreView.h; sourceTree = "<group>"; };
+		4A04A0411EF38FD8004671F5 /* YHChoicePreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YHChoicePreView.m; sourceTree = "<group>"; };
 		4AC6F6451EF1778400E0538C /* UIImage+YH.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+YH.h"; sourceTree = "<group>"; };
 		4AC6F6461EF1778400E0538C /* UIImage+YH.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+YH.m"; sourceTree = "<group>"; };
 		4AC6F6481EF17C0700E0538C /* test.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test.jpg; sourceTree = "<group>"; };
@@ -144,6 +147,8 @@
 				4AF761FF1EF1280E0060BC97 /* YHChoicePicViewCell.m */,
 				4AF762001EF1280E0060BC97 /* YHChoicePicViewCellModel.h */,
 				4AF762011EF1280E0060BC97 /* YHChoicePicViewCellModel.m */,
+				4A04A0401EF38FD8004671F5 /* YHChoicePreView.h */,
+				4A04A0411EF38FD8004671F5 /* YHChoicePreView.m */,
 			);
 			path = YHChoicePicView;
 			sourceTree = "<group>";
@@ -225,6 +230,7 @@
 			files = (
 				4AC6F6471EF1778400E0538C /* UIImage+YH.m in Sources */,
 				4AE9B2351EEFC462007440D7 /* ViewController.m in Sources */,
+				4A04A0421EF38FD8004671F5 /* YHChoicePreView.m in Sources */,
 				4AE9B2341EEFC462007440D7 /* main.m in Sources */,
 				4AF762031EF1280E0060BC97 /* YHChoicePicViewCell.m in Sources */,
 				4AF762041EF1280E0060BC97 /* YHChoicePicViewCellModel.m in Sources */,

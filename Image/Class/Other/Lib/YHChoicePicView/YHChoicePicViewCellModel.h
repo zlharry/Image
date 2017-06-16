@@ -17,6 +17,12 @@ typedef void(^YHChoicePicViewCellModelDidGetImageBlock) (UIImage *image);
 
 @property (nonatomic, strong) PHAsset *asset;
 
+/** 当前图片是否已经被选择 */
+@property (nonatomic, assign, getter=isSelected) BOOL selected;
+
+/** 是否选 */
+@property (nonatomic, assign, getter=isCanSelect) BOOL canSelect;
+
 + (instancetype)modelWithAsset:(PHAsset *)asset;
 
 - (void)getImageWithAscending:(BOOL)ascending size:(CGSize)size useingBlock:(YHChoicePicViewCellModelDidGetImageBlock)didGetImageBlock;

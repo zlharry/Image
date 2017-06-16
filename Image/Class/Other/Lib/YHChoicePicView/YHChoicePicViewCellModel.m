@@ -7,6 +7,7 @@
 //
 
 #import "YHChoicePicViewCellModel.h"
+#import <AssetsLibrary/AssetsLibrary.h>
 
 @interface YHChoicePicViewCellModel ()
 
@@ -16,6 +17,7 @@
 @end
 
 @implementation YHChoicePicViewCellModel
+
 
 
 + (instancetype)modelWithAsset:(PHAsset *)asset
@@ -38,21 +40,19 @@
     option.networkAccessAllowed = YES;
     //param：targetSize 即你想要的图片尺寸，若想要原尺寸则可输入PHImageManagerMaximumSize
     
-    //    CGSize size = CGSizeMake(200, 200);
-    
-    //    __block UIImage *img = nil;
-    //    NSLog(@"---:  %@", [NSThread currentThread]);
-    
-    //    PHCachingImageManager *manager = [PHCachingImageManager defaultManager];
-    //    [manager startCachingImagesForAssets:<#(nonnull NSArray<PHAsset *> *)#> targetSize:<#(CGSize)#> contentMode:<#(PHImageContentMode)#> options:<#(nullable PHImageRequestOptions *)#>]
-    
     __weak YHChoicePicViewCellModel *weakSelf = self;
-    self.requestID = [[PHCachingImageManager defaultManager] requestImageForAsset:weakSelf.asset targetSize:size contentMode:PHImageContentModeAspectFit options:option resultHandler:^(UIImage * _Nullable image, NSDictionary * _Nullable info) {
-        //解析出来的图片
-        if (didGetImageBlock) {
-            didGetImageBlock(image);
-        }
-    }];
+    dispatch_async(dispatch_queue_create("pic", DISPATCH_QUEUE_CONCURRENT), ^{
+        self.requestID = [[PHCachingImageManager defaultManager] requestImageForAsset:weakSelf.asset targetSize:size contentMode:PHImageContentModeAspectFit options:option resultHandler:^(UIImage * _Nullable image, NSDictionary * _Nullable info) {
+            //解析出来的图片
+            if (didGetImageBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    didGetImageBlock(image);
+                });
+                
+            }
+        }];
+    });
+    
 }
 
 - (void)cancelRequeat
