@@ -69,7 +69,7 @@
     
     
     // 是否显示蒙版
-    self.coverView.hidden = !model.canSelect;
+    self.coverView.hidden = model.canSelect;
     
     
     _model = model;
@@ -93,7 +93,7 @@
     if(!_coverView)
     {
         UIView *coverView = [[UIView alloc] init];
-        [self addSubview:coverView];
+        [self insertSubview:coverView aboveSubview:self.imageView];
         _coverView = coverView;
         
         coverView.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.5];
@@ -105,7 +105,7 @@
 {
     if (!_selectBtn) {
         UIButton *selectBtn = [[UIButton alloc] init];
-        [self addSubview:selectBtn];
+        [self insertSubview:selectBtn aboveSubview:self.coverView];
         _selectBtn = selectBtn;
         
         selectBtn.backgroundColor = [UIColor redColor];
@@ -146,8 +146,11 @@
 #pragma mark - 事件处理
 - (void)selectBtnClicked:(UIButton *)sender
 {
+    if ([self.delegate respondsToSelector:@selector(choicePicViewCell:didClickedSelectBtn:)]) {
+        [self.delegate choicePicViewCell:self didClickedSelectBtn:sender];
+    }
+    
     sender.selected = !sender.selected;
-    NSLog(@"点击了选择按钮");
 }
 
 @end

@@ -9,8 +9,18 @@
 #import <UIKit/UIKit.h>
 #import "YHChoicePicViewCellModel.h"
 
+@protocol YHChoicePicViewCellDelegate <NSObject>
+
+@optional
+- (void)choicePicViewCell:(UICollectionViewCell *)cell didClickedSelectBtn:(UIButton *)selectBrn;
+
+@end
+
 
 @interface YHChoicePicViewCell : UICollectionViewCell
+
+/** 代理对象 */
+@property (nonatomic, weak) id<YHChoicePicViewCellDelegate> delegate;
 
 @property (nonatomic, strong) YHChoicePicViewCellModel *model;
 

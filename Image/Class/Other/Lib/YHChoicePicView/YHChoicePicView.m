@@ -17,7 +17,7 @@
 #define COLUMN_Padding 2 // 列间距
 #define ROW_Padding 2 // 行间距
 
-@interface YHChoicePicView () <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource>
+@interface YHChoicePicView () <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, YHChoicePicViewCellDelegate>
 
 /** 手机图片资源数组 */
 @property (nonatomic, strong) NSArray<YHChoicePicViewCellModel *> *pics;
@@ -153,8 +153,10 @@
 {
     YHChoicePicViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CELL_ID forIndexPath:indexPath];
     
+    
     YHChoicePicViewCellModel *model = self.pics[indexPath.item];
     cell.model = model;
+    cell.delegate = self;
     
     return cell;
 }
@@ -177,6 +179,33 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"%ld  ---  %ld", (long)indexPath.section, (long)indexPath.item);
+    
+    // 预览所有的图片
+}
+
+#pragma mark - YHChoicePicViewCellDelegate
+- (void)choicePicViewCell:(UICollectionViewCell *)cell didClickedSelectBtn:(UIButton *)selectBrn
+{
+    NSInteger item = [[self.collectionView indexPathForCell:cell] item];
+    
+//    NSLog(@"点击了%ld的勾", item);
+    
+    YHChoicePicViewCellModel *model = self.pics[item];
+    model.selected = !model.selected;
+    
+    if (model.selected) {
+        [self.selectedPics addObject:model];
+    }
+    else
+    {
+        [self.selectedPics removeObject:model];
+    }
+    
+    NSLog(@"%@", self.selectedPics);
+    
+    [self.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:item inSection:0]]];
+    
+    // 预览已经选择的图片
 }
 
 #pragma mark - 获取相册内所有照片资源

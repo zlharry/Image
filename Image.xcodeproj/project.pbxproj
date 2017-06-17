@@ -16,6 +16,7 @@
 		4AE9B2331EEFC462007440D7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE9B22E1EEFC462007440D7 /* AppDelegate.m */; };
 		4AE9B2341EEFC462007440D7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE9B2301EEFC462007440D7 /* main.m */; };
 		4AE9B2351EEFC462007440D7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE9B2321EEFC462007440D7 /* ViewController.m */; };
+		4AEC53FE1EF3CD6F00ADAC19 /* YHShowImagesForPhoneView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AEC53FD1EF3CD6F00ADAC19 /* YHShowImagesForPhoneView.m */; };
 		4AF0A03D1EF22940004BFA75 /* hh.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4AF0A03C1EF22940004BFA75 /* hh.jpg */; };
 		4AF0A03F1EF229CC004BFA75 /* yh.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4AF0A03E1EF229CC004BFA75 /* yh.jpg */; };
 		4AF762021EF1280E0060BC97 /* YHChoicePicView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF761FD1EF1280E0060BC97 /* YHChoicePicView.m */; };
@@ -39,6 +40,8 @@
 		4AE9B2301EEFC462007440D7 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4AE9B2311EEFC462007440D7 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		4AE9B2321EEFC462007440D7 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		4AEC53FC1EF3CD6F00ADAC19 /* YHShowImagesForPhoneView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YHShowImagesForPhoneView.h; sourceTree = "<group>"; };
+		4AEC53FD1EF3CD6F00ADAC19 /* YHShowImagesForPhoneView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YHShowImagesForPhoneView.m; sourceTree = "<group>"; };
 		4AF0A03C1EF22940004BFA75 /* hh.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = hh.jpg; sourceTree = "<group>"; };
 		4AF0A03E1EF229CC004BFA75 /* yh.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yh.jpg; sourceTree = "<group>"; };
 		4AF761FC1EF1280E0060BC97 /* YHChoicePicView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YHChoicePicView.h; sourceTree = "<group>"; };
@@ -138,9 +141,19 @@
 			path = Lib;
 			sourceTree = "<group>";
 		};
+		4AEC53FB1EF3CC3900ADAC19 /* YHShowImagesForPhoneView */ = {
+			isa = PBXGroup;
+			children = (
+				4AEC53FC1EF3CD6F00ADAC19 /* YHShowImagesForPhoneView.h */,
+				4AEC53FD1EF3CD6F00ADAC19 /* YHShowImagesForPhoneView.m */,
+			);
+			path = YHShowImagesForPhoneView;
+			sourceTree = "<group>";
+		};
 		4AF761FB1EF1280E0060BC97 /* YHChoicePicView */ = {
 			isa = PBXGroup;
 			children = (
+				4AEC53FB1EF3CC3900ADAC19 /* YHShowImagesForPhoneView */,
 				4AF761FC1EF1280E0060BC97 /* YHChoicePicView.h */,
 				4AF761FD1EF1280E0060BC97 /* YHChoicePicView.m */,
 				4AF761FE1EF1280E0060BC97 /* YHChoicePicViewCell.h */,
@@ -233,6 +246,7 @@
 				4A04A0421EF38FD8004671F5 /* YHChoicePreView.m in Sources */,
 				4AE9B2341EEFC462007440D7 /* main.m in Sources */,
 				4AF762031EF1280E0060BC97 /* YHChoicePicViewCell.m in Sources */,
+				4AEC53FE1EF3CD6F00ADAC19 /* YHShowImagesForPhoneView.m in Sources */,
 				4AF762041EF1280E0060BC97 /* YHChoicePicViewCellModel.m in Sources */,
 				4AE9B2331EEFC462007440D7 /* AppDelegate.m in Sources */,
 				4AF762021EF1280E0060BC97 /* YHChoicePicView.m in Sources */,
