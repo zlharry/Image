@@ -31,6 +31,15 @@
 /** 底部预览的View */
 @property (nonatomic, weak) YHChoicePreView *preView;
 
+/** 选择完 一张图片 后需要干的事情 */
+@property (nonatomic, copy) YHChoicePicViewDidFinishedSelectOneImageBlock didFinishedSelectImageBlock;
+
+/** 选择完 多张图片 后需要干的事情 */
+@property (nonatomic, copy) YHChoicePicViewDidFinishedSelectImagesBlock didFinishedSelectImagesBlock;
+
+/** 最大选择照片数量 */
+@property (nonatomic, assign) NSInteger maxNumber;
+
 @end
 
 @implementation YHChoicePicView
@@ -40,11 +49,42 @@
     if (self = [super init]) {
         
         self.backgroundColor = [UIColor yellowColor];
-        
-       
     }
     
     return self;
+}
+
+
+/** 创建一个图片选择View,同时设置选择完 多张图片 成功或失败后的相应动作 */
+- (instancetype)initWithMaxNumber:(NSInteger)maxNumber didFinishedSelectImagesBlock:(YHChoicePicViewDidFinishedSelectImagesBlock)didFinishedSelectImagesBlock
+{
+    if (self = [super init]) {
+        self.didFinishedSelectImagesBlock = didFinishedSelectImagesBlock;
+        self.maxNumber = maxNumber;
+    }
+    return self;
+}
+
+/** 创建一个图片选择View,同时设置选择完 一张图片 成功或失败后的相应动作 */
+- (instancetype)initWithMaxNumber:(NSInteger)maxNumber didFinishedSelectImageBlock:(YHChoicePicViewDidFinishedSelectOneImageBlock)didFinishedSelectImageBlock
+{
+    if (self = [super init]) {
+        self.didFinishedSelectImageBlock = didFinishedSelectImageBlock;
+        self.maxNumber = maxNumber;
+    }
+    return self;
+}
+
+#pragma mark - 工具方法
+/** 给所有未选择的添加遮盖／取消遮盖 */
+- (void)coverNotSelected:(BOOL)cover
+{
+    for (YHChoicePicViewCellModel *model in self.pics) {
+        if (!model.selected) {
+            model.canSelect = cover;
+        }
+    }
+    [self.collectionView reloadData];
 }
 
 #pragma mark - 延迟加载
@@ -184,6 +224,7 @@
 }
 
 #pragma mark - YHChoicePicViewCellDelegate
+/** 用户点击了某个照片的勾 */
 - (void)choicePicViewCell:(UICollectionViewCell *)cell didClickedSelectBtn:(UIButton *)selectBrn
 {
     NSInteger item = [[self.collectionView indexPathForCell:cell] item];
@@ -195,10 +236,20 @@
     
     if (model.selected) {
         [self.selectedPics addObject:model];
+        
+        // 添加了以后如果已经达到上限
+        if (self.selectedPics.count == self.maxNumber) {
+            
+            [self coverNotSelected:NO];
+        }
     }
     else
     {
         [self.selectedPics removeObject:model];
+        if (self.selectedPics.count == self.maxNumber - 1) {
+            
+            [self coverNotSelected:YES];
+        }
     }
     
     NSLog(@"%@", self.selectedPics);

@@ -146,6 +146,11 @@
 #pragma mark - 事件处理
 - (void)selectBtnClicked:(UIButton *)sender
 {
+    if (!self.model.canSelect) {
+        NSLog(@"提示用户，不能继续添加了！！！");
+        return;
+    }
+    
     if ([self.delegate respondsToSelector:@selector(choicePicViewCell:didClickedSelectBtn:)]) {
         [self.delegate choicePicViewCell:self didClickedSelectBtn:sender];
     }

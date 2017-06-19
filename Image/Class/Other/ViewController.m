@@ -26,7 +26,9 @@
 - (YHChoicePicView *)choicePicView
 {
     if (!_choicePicView) {
-        YHChoicePicView *choicePicView = [[YHChoicePicView alloc] init];
+        YHChoicePicView *choicePicView = [[YHChoicePicView alloc] initWithMaxNumber:4 didFinishedSelectImageBlock:^(UIImage *selectedImage, PHAsset *asset, NSError *error) {
+            ;
+        }];
         [self.view addSubview:choicePicView];
         _choicePicView  = choicePicView;
     }
